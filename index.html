@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MineCalc UA — безкоштовні українськомовні калькулятори для гравців Minecraft: конвертер координат, ресурси, редстоун.">
+  <meta name="keywords" content="калькулятор майнкрафт, minecraft калькулятор українською, конвертер координат незер, калькулятор ресурсів minecraft, шалкери стаки калькулятор, редстоун помічник, генератор кіл майнкрафт, рецепти крафту майнкрафт">
+  <title>Калькулятор Майнкрафт українською | MineCalc UA</title>
+
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Шрифти: Unbounded (заголовки), Plus Jakarta Sans (текст) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&amp;family=Unbounded:wght@600;700&amp;display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Шапка сайту -->
+  <header class="sticky top-0 z-10 border-b border-[rgba(var(--color-accent-rgb),0.4)] bg-[var(--color-bg-deep)] shadow-[var(--shadow-header-glow)]">
+    <div class="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-2 px-4 py-2 sm:px-6 lg:px-8 md:flex-nowrap md:gap-4">
+      <a class="flex items-center gap-2 rounded text-sm font-semibold transition-colors hover:text-[var(--color-text-muted)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-text)]" href="index.html">
+        <img src="assets/images/Logo.svg" alt="MineCalc UA" width="40" height="40">
+        <span class="hidden lg:inline">Грай без помилок</span>
+      </a>
+
+      <nav class="order-3 hidden w-full md:order-none md:flex md:w-auto md:flex-1 md:justify-center md:overflow-x-auto lg:flex-none lg:overflow-visible" id="primary-navigation" aria-label="Основна навігація">
+        <ul class="flex flex-col gap-1 py-2 md:flex-row md:items-center md:justify-center md:gap-2 md:whitespace-nowrap lg:gap-4">
+          <li><a class="block rounded px-4 py-2 text-sm font-medium !text-[var(--color-text-muted)] transition-colors hover:!text-[var(--color-text)] focus-visible:!text-[var(--color-text)] aria-[current=page]:!text-[var(--color-text)] md:px-2" href="index.html" aria-current="page">Головна</a></li>
+          <li><a class="block rounded px-4 py-2 text-sm font-medium !text-[var(--color-text-muted)] transition-colors hover:!text-[var(--color-text)] focus-visible:!text-[var(--color-text)] aria-[current=page]:!text-[var(--color-text)] md:px-2" href="nether.html">Конвертер</a></li>
+          <li><a class="block rounded px-4 py-2 text-sm font-medium !text-[var(--color-text-muted)] transition-colors hover:!text-[var(--color-text)] focus-visible:!text-[var(--color-text)] aria-[current=page]:!text-[var(--color-text)] md:px-2" href="resources.html">Ресурси</a></li>
+          <li><a class="block rounded px-4 py-2 text-sm font-medium !text-[var(--color-text-muted)] transition-colors hover:!text-[var(--color-text)] focus-visible:!text-[var(--color-text)] aria-[current=page]:!text-[var(--color-text)] md:px-2" href="redstone.html">Редстоун</a></li>
+          <li><a class="block rounded px-4 py-2 text-sm font-medium !text-[var(--color-text-muted)] transition-colors hover:!text-[var(--color-text)] focus-visible:!text-[var(--color-text)] aria-[current=page]:!text-[var(--color-text)] md:px-2" href="recipes.html">Рецепти</a></li>
+          <li><a class="block rounded px-4 py-2 text-sm font-medium !text-[var(--color-text-muted)] transition-colors hover:!text-[var(--color-text)] focus-visible:!text-[var(--color-text)] aria-[current=page]:!text-[var(--color-text)] md:px-2" href="shapes.html">Фігури</a></li>
+          <li><a class="block rounded px-4 py-2 text-sm font-medium !text-[var(--color-text-muted)] transition-colors hover:!text-[var(--color-text)] focus-visible:!text-[var(--color-text)] aria-[current=page]:!text-[var(--color-text)] md:px-2" href="costs.html">Витрати</a></li>
+        </ul>
+      </nav>
+
+      <div class="ml-auto flex items-center gap-2 md:ml-0">
+        <fieldset class="version-toggle">
+          <legend class="sr-only">Версія Minecraft</legend>
+          <input class="version-toggle__input sr-only" type="radio" name="version" id="version-java" value="java" checked>
+          <label class="version-toggle__label" for="version-java">Java</label>
+          <input class="version-toggle__input sr-only" type="radio" name="version" id="version-bedrock" value="bedrock">
+          <label class="version-toggle__label" for="version-bedrock">Bedrock</label>
+          <span class="version-toggle__indicator" aria-hidden="true"></span>
+        </fieldset>
+        <button
+          class="menu-toggle inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg p-2 text-[var(--color-text)] transition-colors hover:bg-[var(--color-surface)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-text)] md:hidden"
+          type="button"
+          aria-label="Відкрити меню"
+          aria-controls="primary-navigation"
+          aria-expanded="false"
+        >
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Головний блок -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__inner mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-0">
+        <!-- Заголовок і вступний текст позначені як вступ секції. -->
+        <header class="hero__text">
+          <h1 class="hero__title" id="hero-title">Точні калькулятори Minecraft українською</h1>
+          <p class="hero__subtitle">Розраховуй ресурси, координати та механізми. Менше підрахунків — більше часу для гри.</p>
+        </header>
+      </div>
+    </section>
+
+    <!-- Три основні інструменти -->
+    <section class="tools mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8" aria-labelledby="tools-title">
+      <h2 class="visually-hidden" id="tools-title">Основні інструменти</h2>
+      <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <li>
+          <article class="rounded-[var(--radius-md)] [transition:background-color_var(--transition)] hover:bg-[var(--color-surface)] focus-within:bg-[var(--color-surface)]">
+            <a class="flex aspect-square flex-col items-center justify-start gap-4 px-6 pt-12 pb-6 text-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-text)]" href="resources.html">
+              <img class="h-40 w-full object-contain" src="assets/icons/resources.svg" alt="" width="120" height="120" loading="lazy" decoding="async">
+              <h3 class="text-[length:var(--font-size-card-title)] font-semibold">Ресурси</h3>
+              <p class="max-w-[28ch] text-[length:var(--font-size-small)] text-[var(--color-text-muted)]">Порахуй блоки, стаки та шалкери для наступної великої будівлі.</p>
+            </a>
+          </article>
+        </li>
+        <li>
+          <article class="rounded-[var(--radius-md)] [transition:background-color_var(--transition)] hover:bg-[var(--color-surface)] focus-within:bg-[var(--color-surface)]">
+            <a class="flex aspect-square flex-col items-center justify-start gap-4 px-6 pt-12 pb-6 text-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-text)]" href="nether.html">
+              <img class="h-40 w-full object-contain" src="assets/icons/nether.svg" alt="" width="120" height="120" loading="lazy" decoding="async">
+              <h3 class="text-[length:var(--font-size-card-title)] font-semibold">Конвертер</h3>
+              <p class="max-w-[28ch] text-[length:var(--font-size-small)] text-[var(--color-text-muted)]">Перетворюй координати між звичайним світом і Незером.</p>
+            </a>
+          </article>
+        </li>
+        <li>
+          <article class="rounded-[var(--radius-md)] [transition:background-color_var(--transition)] hover:bg-[var(--color-surface)] focus-within:bg-[var(--color-surface)]">
+            <a class="flex aspect-square flex-col items-center justify-start gap-4 px-6 pt-12 pb-6 text-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-text)]" href="redstone.html">
+              <img class="h-40 w-full object-contain" src="assets/icons/redstone.svg" alt="" width="120" height="120" loading="lazy" decoding="async">
+              <h3 class="text-[length:var(--font-size-card-title)] font-semibold">Редстоун</h3>
+              <p class="max-w-[28ch] text-[length:var(--font-size-small)] text-[var(--color-text-muted)]">Розраховуй затримки та плануй точну роботу своїх механізмів.</p>
+            </a>
+          </article>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Додаткові інструменти -->
+    <section class="more-tools mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8" aria-labelledby="more-title">
+      <h2 class="section-title" id="more-title">Більше інструментів</h2>
+      <ul class="more-tools__list">
+        <li><a class="tile" href="recipes.html"><span class="tile__label">Рецепти</span><span class="tile__arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></a></li>
+        <li><a class="tile" href="shapes.html"><span class="tile__label">Фігури</span><span class="tile__arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></a></li>
+        <li><a class="tile" href="costs.html"><span class="tile__label">Витрати</span><span class="tile__arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></a></li>
+      </ul>
+    </section>
+
+    <section class="mx-auto mt-[var(--space-section)] w-full max-w-6xl px-4 sm:px-6 lg:px-8" id="map" aria-labelledby="map-title">
+      <h2 class="section-title mb-6" id="map-title">Де нас знайти</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+        <div class="h-72 sm:h-80 md:h-96 w-full overflow-hidden rounded-2xl shadow-xl">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d19910.352535068716!2d30.02628661283053!3d51.40683846892714!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x472a7daa5b69c469%3A0x32d80be9b6bf089a!2z0J_RgNC40L8n0Y_RgtGMLCDQmtC40ZfQstGB0YzQutCwINC-0LHQu9Cw0YHRgtGM!5e0!3m2!1suk!2sua!4v1793909866459!5m2!1suk!2sua" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>" title="Інтерактивна карта" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <model-viewer class="w-full h-72 sm:h-80 md:h-96 bg-transparent" src="assets/models/model.glb" alt="3D-модель Minecraft" camera-controls auto-rotate loading="lazy" shadow-intensity="0"></model-viewer>
+      </div>
+    </section>
+
+    <section class="mx-auto mt-[var(--space-section)] w-full max-w-6xl px-4 sm:px-6 lg:px-8" id="video" aria-labelledby="video-title">
+      <h2 class="section-title mb-6" id="video-title">Відео</h2>
+      <div class="aspect-video w-full max-w-3xl mx-auto rounded-2xl overflow-hidden shadow-xl">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/j2krKQ_u8H4?si=fi5Q01O1X5d6QxgK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <!-- Переваги -->
+    <section class="benefits" aria-labelledby="benefits-title">
+      <div class="benefits__inner mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+        <!-- Вступ до переліку переваг є заголовком цієї секції. -->
+        <header class="benefits__intro">
+          <h2 class="section-title" id="benefits-title">Чому MineCalc UA</h2>
+          <p>Швидкий сайт без реклами, який працює так, як потрібно гравцеві під час гри.</p>
+        </header>
+        <ul class="benefits__list">
+          <li class="benefits__item">
+            <h3 class="benefits__title">Точність</h3>
+            <p>Правильне округлення для від'ємних координат.</p>
+          </li>
+          <li class="benefits__item">
+            <h3 class="benefits__title">Швидкість</h3>
+            <p>Результат одразу під час введення, копіювання в один клік.</p>
+          </li>
+          <li class="benefits__item">
+            <h3 class="benefits__title">Зручність</h3>
+            <p>Темна тема без реклами та затримок.</p>
+          </li>
+          <li class="benefits__item">
+            <h3 class="benefits__title">Українською</h3>
+            <p>Повна адаптація термінології та назв предметів.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Підвал -->
+  <footer class="border-t border-[var(--color-surface)] bg-[var(--color-bg-deep)] py-6 md:py-12">
+    <div class="mx-auto grid w-full max-w-6xl grid-cols-2 gap-4 px-4 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
+      <div class="col-span-full grid grid-cols-2 gap-4 lg:col-span-3 lg:grid-cols-3">
+        <nav aria-label="Інструменти">
+          <h2 class="mb-2 font-[var(--font-body)] text-base font-semibold">Інструменти</h2>
+          <ul class="flex flex-col gap-y-1 md:gap-y-2">
+            <li><a class="[transition:color_var(--transition)] !text-[var(--color-text-muted)] hover:!text-[var(--color-text)] focus-visible:!text-[var(--color-text)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-text)] text-[length:var(--font-size-small)]" href="nether.html">Конвертер</a></li>
+            <li><a class="[transition:color_var(--transition)] !text-[var(--color-text-muted)] hover:!text-[var(--color-text)] focus-visible:!text-[var(--color-text)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-text)] text-[length:var(--font-size-small)]" href="resources.html">Ресурси</a></li>
+            <li><a class="[transition:color_var(--transition)] !text-[var(--color-text-muted)] hover:!text-[var(--color-text)] focus-visible:!text-[var(--color-text)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-text)] text-[length:var(--font-size-small)]" href="redstone.html">Редстоун</a></li>
+            <li><a class="[transition:color_var(--transition)] !text-[var(--color-text-muted)] hover:!text-[var(--color-text)] focus-visible:!text-[var(--color-text)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-text)] text-[length:var(--font-size-small)]" href="recipes.html">Рецепти</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Проєкт">
+          <h2 class="mb-2 font-[var(--font-body)] text-base font-semibold">Проєкт</h2>
+          <ul class="flex flex-col gap-y-1 md:gap-y-2">
+            <li><a class="[transition:color_var(--transition)] !text-[var(--color-text-muted)] hover:!text-[var(--color-text)] focus-visible:!text-[var(--color-text)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-text)] text-[length:var(--font-size-small)]" href="about.html"><i class="fa-solid fa-circle-info mr-2 text-[var(--icon-color)]" aria-hidden="true"></i>Про проєкт</a></li>
+            <li><a class="[transition:color_var(--transition)] !text-[var(--color-text-muted)] hover:!text-[var(--color-text)] focus-visible:!text-[var(--color-text)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-text)] text-[length:var(--font-size-small)]" href="feedback.html"><i class="fa-solid fa-envelope mr-2 text-[var(--icon-color)]" aria-hidden="true"></i>Зворотний зв'язок</a></li>
+            <li><a class="[transition:color_var(--transition)] !text-[var(--color-text-muted)] hover:!text-[var(--color-text)] focus-visible:!text-[var(--color-text)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-text)] text-[length:var(--font-size-small)]" href="https://forms.gle/XHbDWPuHxU9ZtZ6y7" target="_blank" rel="noopener noreferrer">Приєднатись</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Правова інформація">
+          <h2 class="mb-2 font-[var(--font-body)] text-base font-semibold">Правова інформація</h2>
+          <ul class="flex flex-col gap-y-1 md:gap-y-2">
+            <li><a class="[transition:color_var(--transition)] !text-[var(--color-text-muted)] hover:!text-[var(--color-text)] focus-visible:!text-[var(--color-text)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-text)] text-[length:var(--font-size-small)]" href="privacy.html"><i class="fa-solid fa-shield-halved mr-2 text-[var(--icon-color)]" aria-hidden="true"></i>Конфіденційність</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="col-span-full mt-0 text-[length:var(--font-size-small)] text-[var(--color-text-muted)] lg:col-span-1">Не є офіційним продуктом Mojang / Microsoft. Усі права належать їхнім власникам. © 2026 MineCalc UA</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
