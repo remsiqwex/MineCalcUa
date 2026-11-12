@@ -1,0 +1,372 @@
+/* =============================================
+   MineCalc UA — базові стилі (ЛР №5)
+   Дизайн-токени взято з Figma (ЛР №4)
+   ============================================= */
+
+/* 1. ГЛОБАЛЬНІ ЗМІННІ ---------------------------------- */
+:root {
+  /* Colors: semantic tokens make alternate palettes straightforward. */
+  --color-primary: #1d793b;
+  --color-accent: #ff5e97;
+  --color-accent-rgb: 255, 94, 151;
+  --color-cta: #2563EB;
+  --color-bg: #1E1E1E;
+  --color-bg-deep: #121212;
+  --color-surface: #262626;
+  --color-text: #f4f4f5;
+  --color-text-muted: #a1a1aa;
+  --color-border: #8e8e98;
+  --icon-size: 1rem;
+  --icon-color: var(--color-primary);
+
+  /* Typography */
+  --font-heading: "Unbounded", system-ui, sans-serif;
+  --font-body: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-size-small: 0.875rem;
+  --font-size-xs: 0.75rem;
+  --font-size-body: 1rem;
+  --font-size-h2: 1.5rem;
+  --font-size-card-title: 1.125rem;
+  --font-size-h1: clamp(1.75rem, 4vw, 2.5rem);
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-2xs: 2px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 48px;
+  --space-2xl: 72px;
+  --space-section: 96px;
+
+  /* Utility sizing */
+  --size-visually-hidden: 1px;
+
+  /* Border radius */
+  --radius-md: 12px;
+  --radius-full: 9999px;
+
+  /* Borders and focus */
+  --border-width: 1px;
+  --focus-outline-width: 2px;
+  --focus-outline-offset: 3px;
+
+  /* Shadows */
+  --shadow-header-glow: 0 4px 24px rgba(var(--color-accent-rgb), 0.25);
+  --shadow-hero: 0 8px 32px rgba(var(--color-accent-rgb), 0.2);
+
+  /* Container */
+  --container-width: 1200px;
+
+  /* Transitions */
+  --transition: 0.2s ease;
+  --transition-toggle: 0.3s ease;
+  --transition-menu: 0.3s ease;
+}
+
+/* 2. СКИДАННЯ І БАЗА ----------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
+  line-height: 1.5;
+}
+
+h1, h2, h3, p, ul {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  line-height: 1.25;
+}
+
+:focus-visible {
+  outline: var(--focus-outline-width) solid var(--color-text);
+  outline-offset: var(--focus-outline-offset);
+}
+
+/* 3. ПЕРЕМИКАЧ ВЕРСІЇ --------------------------------- */
+.version-toggle {
+  position: relative;
+  display: inline-grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 172px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-full);
+}
+
+.version-toggle__label {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  padding: 8px 10px;
+  border-radius: var(--radius-full);
+  color: var(--color-text-muted);
+  font: var(--font-weight-medium) var(--font-size-small) var(--font-body);
+  cursor: pointer;
+  text-align: center;
+  transition: color var(--transition-toggle);
+}
+
+.version-toggle__label:first-of-type::after {
+  content: "";
+  position: absolute;
+  top: 25%;
+  right: 0;
+  width: var(--border-width);
+  height: 50%;
+  background-color: var(--color-border);
+}
+
+.version-toggle__input:checked + .version-toggle__label {
+  color: var(--color-text);
+}
+
+.version-toggle__input:focus-visible + .version-toggle__label {
+  outline: var(--focus-outline-width) solid var(--color-text);
+  outline-offset: var(--focus-outline-offset);
+}
+
+.version-toggle__indicator {
+  position: absolute;
+  z-index: 0;
+  inset: 0 auto 0 0;
+  width: 50%;
+  border-radius: var(--radius-full);
+  background-color: var(--color-primary);
+  transition: transform var(--transition-toggle);
+}
+
+.version-toggle__input:nth-of-type(2):checked ~ .version-toggle__indicator {
+  transform: translateX(100%);
+}
+
+/* 4. HERO --------------------------------------------- */
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 520px;
+  background: var(--color-bg) url("../assets/images/hero-banner.jpg") right center / cover no-repeat;
+  box-shadow: var(--shadow-hero);
+}
+
+/* Градієнт кольору фону зліва, щоб текст читався */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    var(--color-bg) 0%,
+    var(--color-bg) 40%,
+    transparent 75%
+  );
+}
+
+.hero__inner {
+  position: relative;
+}
+
+.hero__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  max-width: 560px;
+}
+
+.hero__title {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-bold);
+}
+
+.hero__subtitle {
+  color: var(--color-text-muted);
+}
+
+/* 5. ОСНОВНІ ІНСТРУМЕНТИ (Grid) ----------------------- */
+.tools,
+.more-tools {
+  margin-top: var(--space-section);
+}
+
+/* 6. БІЛЬШЕ ІНСТРУМЕНТІВ ------------------------------ */
+.more-tools__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.tile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 56px;
+  padding: var(--space-lg);
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+  font-weight: var(--font-weight-semibold);
+  transition: border-color var(--transition);
+}
+
+.tile__arrow {
+  color: var(--color-text-muted);
+  transition: color var(--transition);
+}
+
+.icon,
+.tile__arrow i {
+  font-size: var(--icon-size);
+  color: var(--icon-color);
+}
+
+.icon {
+  margin-right: var(--space-sm);
+}
+
+.tile:hover,
+.tile:focus-visible {
+  border-color: var(--color-accent);
+}
+
+.tile:hover .tile__arrow,
+.tile:focus-visible .tile__arrow,
+.tile:active .tile__arrow {
+  color: var(--color-accent);
+}
+
+.tile:hover .tile__arrow i,
+.tile:focus-visible .tile__arrow i,
+.tile:active .tile__arrow i {
+  color: var(--color-accent);
+}
+
+.tile:active {
+  background-color: var(--color-bg);
+  border-color: var(--color-accent);
+}
+
+/* 7. ПЕРЕВАГИ ----------------------------------------- */
+.benefits {
+  margin-top: var(--space-section);
+  padding-block: var(--space-xl);
+  background-color: var(--color-bg-deep);
+}
+
+.benefits__inner {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-xl);
+}
+
+.benefits__intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  color: var(--color-text-muted);
+}
+
+.benefits__intro .section-title {
+  color: var(--color-text);
+}
+
+.benefits__list {
+  counter-reset: benefit;
+}
+
+.benefits__item {
+  position: relative;
+  padding: var(--space-lg) 0 var(--space-lg) var(--space-2xl);
+  border-top: var(--border-width) solid var(--color-border);
+  counter-increment: benefit;
+  color: var(--color-text-muted);
+}
+
+.benefits__item::before {
+  content: "0" counter(benefit);
+  position: absolute;
+  left: 0;
+  top: var(--space-lg);
+  color: var(--color-primary);
+  font: var(--font-weight-bold) 1.5rem var(--font-heading);
+}
+
+.benefits__title {
+  margin-bottom: var(--space-xs);
+  font-family: var(--font-body);
+  font-size: var(--font-size-card-title);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+}
+
+/* 8. БАЗОВА АДАПТИВНІСТЬ ------------------------------ */
+@media (max-width: 900px) {
+  .hero {
+    min-height: 420px;
+  }
+
+  .hero::before {
+    background: linear-gradient(to right, var(--color-bg) 0%, var(--color-bg) 55%, transparent 100%);
+  }
+
+  .tools,
+  .more-tools,
+  .benefits {
+    margin-top: var(--space-xl);
+  }
+}
+
+@media (max-width: 768px) {
+  .version-toggle {
+    width: 132px;
+  }
+
+  .version-toggle__label {
+    padding: 8px;
+    font-size: var(--font-size-xs);
+  }
+
+  .version-toggle__label:first-of-type::after {
+    right: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition: 0s;
+    --transition-toggle: 0s;
+    --transition-menu: 0s;
+  }
+}
