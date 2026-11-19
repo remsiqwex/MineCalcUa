@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Зворотний зв'язок MineCalc UA: напишіть нам ідею, помилку чи побажання щодо калькуляторів Minecraft.">
+  <title>Зворотний зв'язок | MineCalc UA</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Шрифти: Unbounded (заголовки), Plus Jakarta Sans (текст) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&amp;family=Unbounded:wght@600;700&amp;display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Шапка сайту (як на головній) -->
+  <header class="sticky top-0 z-10 border-b border-[rgba(var(--color-accent-rgb),0.4)] bg-[var(--color-bg-deep)] shadow-[var(--shadow-header-glow)]">
+    <div class="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-2 px-4 py-2 sm:px-6 lg:px-8 md:flex-nowrap md:gap-4">
+      <a class="flex items-center gap-2 rounded text-sm font-semibold transition-colors hover:text-[var(--color-text-muted)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-text)]" href="index.html">
+        <img src="assets/images/Logo.svg" alt="MineCalc UA" width="40" height="40">
+        <span class="hidden lg:inline">Грай без помилок</span>
+      </a>
+
+      <nav class="order-3 hidden w-full md:order-none md:flex md:w-auto md:flex-1 md:justify-center md:overflow-x-auto lg:flex-none lg:overflow-visible" id="primary-navigation" aria-label="Основна навігація">
+        <ul class="flex flex-col gap-1 py-2 md:flex-row md:items-center md:justify-center md:gap-2 md:whitespace-nowrap lg:gap-4">
+          <li><a class="block rounded px-4 py-2 text-sm font-medium !text-[var(--color-text-muted)] transition-colors hover:!text-[var(--color-text)] focus-visible:!text-[var(--color-text)] md:px-2" href="index.html">Головна</a></li>
+          <li><a class="block rounded px-4 py-2 text-sm font-medium !text-[var(--color-text-muted)] transition-colors hover:!text-[var(--color-text)] focus-visible:!text-[var(--color-text)] md:px-2" href="nether.html">Конвертер</a></li>
+          <li><a class="block rounded px-4 py-2 text-sm font-medium !text-[var(--color-text-muted)] transition-colors hover:!text-[var(--color-text)] focus-visible:!text-[var(--color-text)] md:px-2" href="resources.html">Ресурси</a></li>
+          <li><a class="block rounded px-4 py-2 text-sm font-medium !text-[var(--color-text-muted)] transition-colors hover:!text-[var(--color-text)] focus-visible:!text-[var(--color-text)] md:px-2" href="redstone.html">Редстоун</a></li>
+          <li><a class="block rounded px-4 py-2 text-sm font-medium !text-[var(--color-text-muted)] transition-colors hover:!text-[var(--color-text)] focus-visible:!text-[var(--color-text)] md:px-2" href="recipes.html">Рецепти</a></li>
+          <li><a class="block rounded px-4 py-2 text-sm font-medium !text-[var(--color-text-muted)] transition-colors hover:!text-[var(--color-text)] focus-visible:!text-[var(--color-text)] md:px-2" href="shapes.html">Фігури</a></li>
+          <li><a class="block rounded px-4 py-2 text-sm font-medium !text-[var(--color-text-muted)] transition-colors hover:!text-[var(--color-text)] focus-visible:!text-[var(--color-text)] md:px-2" href="costs.html">Витрати</a></li>
+        </ul>
+      </nav>
+
+      <div class="ml-auto flex items-center gap-2 md:ml-0">
+        <button
+          class="menu-toggle inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg p-2 text-[var(--color-text)] transition-colors hover:bg-[var(--color-surface)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-text)] md:hidden"
+          type="button"
+          aria-label="Відкрити меню"
+          aria-controls="primary-navigation"
+          aria-expanded="false"
+        >
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="mx-auto w-full max-w-3xl px-4 py-12 sm:px-6 md:py-16">
+
+    <!-- Заголовок сторінки -->
+    <header class="mb-8 flex flex-col gap-3">
+      <h1 class="text-[length:var(--font-size-h1)] font-bold">Зворотний зв'язок</h1>
+      <p class="text-[var(--color-text-muted)]">Знайшли помилку в калькуляторі чи маєте ідею нового інструмента? Напишіть нам — відповімо на email протягом двох днів.</p>
+    </header>
+
+    <!-- Форма зворотного зв'язку. novalidate вимикає стандартні підказки браузера: усю перевірку робить validation.js -->
+    <form
+      id="feedbackForm"
+      class="flex flex-col gap-6 rounded-[var(--radius-md)] border border-[var(--color-surface)] bg-[var(--color-bg-deep)] p-5 shadow-xl sm:p-8"
+      action="#"
+      method="post"
+      novalidate
+      aria-describedby="formHint"
+    >
+      <p id="formHint" class="text-[length:var(--font-size-small)] text-[var(--color-text-muted)]">
+        Поля, позначені <span class="text-[var(--color-accent)]" aria-hidden="true">*</span><span class="sr-only">зірочкою</span>, обов'язкові.
+      </p>
+
+      <!-- Ряд 1: ім'я та email. На мобільному в одну колонку, від md — у дві -->
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div class="flex flex-col gap-2">
+          <label for="userName" class="text-sm font-semibold">Ім'я <span class="text-[var(--color-accent)]" aria-hidden="true">*</span></label>
+          <input
+            id="userName"
+            name="userName"
+            type="text"
+            autocomplete="name"
+            maxlength="50"
+            required
+            aria-describedby="userNameError"
+            aria-invalid="false"
+            class="field min-h-[48px] w-full rounded-lg border-2 border-gray-600 bg-[var(--color-surface)] px-4 py-3 text-base text-[var(--color-text)] transition-colors placeholder:text-gray-500 hover:border-gray-400 focus:outline-none focus-visible:border-blue-400 focus-visible:ring-4 focus-visible:ring-blue-500/30"
+            placeholder="Наприклад, Марія"
+          >
+          <p id="userNameError" class="hidden text-sm text-red-400" aria-live="polite"></p>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label for="email" class="text-sm font-semibold">Email <span class="text-[var(--color-accent)]" aria-hidden="true">*</span></label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            inputmode="email"
+            autocomplete="email"
+            maxlength="100"
+            required
+            aria-describedby="emailError"
+            aria-invalid="false"
+            class="field min-h-[48px] w-full rounded-lg border-2 border-gray-600 bg-[var(--color-surface)] px-4 py-3 text-base text-[var(--color-text)] transition-colors placeholder:text-gray-500 hover:border-gray-400 focus:outline-none focus-visible:border-blue-400 focus-visible:ring-4 focus-visible:ring-blue-500/30"
+            placeholder="name@example.com"
+          >
+          <p id="emailError" class="hidden text-sm text-red-400" aria-live="polite"></p>
+        </div>
+      </div>
+
+      <!-- Ряд 2: телефон та тема звернення -->
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div class="flex flex-col gap-2">
+          <label for="phone" class="text-sm font-semibold">Телефон <span class="text-[var(--color-accent)]" aria-hidden="true">*</span></label>
+          <input
+            id="phone"
+            name="phone"
+            type="tel"
+            inputmode="tel"
+            autocomplete="tel"
+            maxlength="20"
+            required
+            aria-describedby="phoneHint phoneError"
+            aria-invalid="false"
+            class="field min-h-[48px] w-full rounded-lg border-2 border-gray-600 bg-[var(--color-surface)] px-4 py-3 text-base text-[var(--color-text)] transition-colors placeholder:text-gray-500 hover:border-gray-400 focus:outline-none focus-visible:border-blue-400 focus-visible:ring-4 focus-visible:ring-blue-500/30"
+            placeholder="+380501234567"
+          >
+          <p id="phoneHint" class="text-xs text-[var(--color-text-muted)]">Формат +380XXXXXXXXX</p>
+          <p id="phoneError" class="hidden text-sm text-red-400" aria-live="polite"></p>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label for="topic" class="text-sm font-semibold">Тема звернення</label>
+          <select
+            id="topic"
+            name="topic"
+            class="field min-h-[48px] w-full cursor-pointer rounded-lg border-2 border-gray-600 bg-[var(--color-surface)] px-4 py-3 text-base text-[var(--color-text)] transition-colors hover:border-gray-400 focus:outline-none focus-visible:border-blue-400 focus-visible:ring-4 focus-visible:ring-blue-500/30"
+          >
+            <option value="idea">Ідея нового калькулятора</option>
+            <option value="bug">Помилка в розрахунках</option>
+            <option value="translation">Переклад і терміни</option>
+            <option value="other">Інше</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Повідомлення на всю ширину -->
+      <div class="flex flex-col gap-2">
+        <div class="flex items-baseline justify-between gap-4">
+          <label for="message" class="text-sm font-semibold">Повідомлення <span class="text-[var(--color-accent)]" aria-hidden="true">*</span></label>
+          <span id="messageCounter" class="text-xs text-[var(--color-text-muted)]" aria-live="off">0 / 1000</span>
+        </div>
+        <textarea
+          id="message"
+          name="message"
+          rows="5"
+          maxlength="1000"
+          required
+          aria-describedby="messageError"
+          aria-invalid="false"
+          class="field min-h-[140px] w-full resize-y rounded-lg border-2 border-gray-600 bg-[var(--color-surface)] px-4 py-3 text-base text-[var(--color-text)] transition-colors placeholder:text-gray-500 hover:border-gray-400 focus:outline-none focus-visible:border-blue-400 focus-visible:ring-4 focus-visible:ring-blue-500/30"
+          placeholder="Опишіть ідею або помилку: який калькулятор, які дані вводили, що отримали"
+        ></textarea>
+        <p id="messageError" class="hidden text-sm text-red-400" aria-live="polite"></p>
+      </div>
+
+      <!-- Згода з політикою конфіденційності -->
+      <div class="flex flex-col gap-2">
+        <div class="flex items-start gap-3">
+          <input
+            id="agreement"
+            name="agreement"
+            type="checkbox"
+            required
+            aria-describedby="agreementError"
+            aria-invalid="false"
+            class="mt-0.5 h-6 w-6 shrink-0 cursor-pointer rounded accent-[var(--color-primary)] focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/50"
+          >
+          <label for="agreement" class="cursor-pointer text-sm text-[var(--color-text-muted)]">
+            Погоджуюсь з <a href="privacy.html" class="text-[var(--color-text)] underline underline-offset-2 hover:text-[var(--color-accent)]">політикою конфіденційності</a> <span class="text-[var(--color-accent)]" aria-hidden="true">*</span>
+          </label>
+        </div>
+        <p id="agreementError" class="hidden text-sm text-red-400" aria-live="polite"></p>
+      </div>
+
+      <button
+        id="submitBtn"
+        type="submit"
+        class="min-h-[52px] w-full rounded-lg bg-[var(--color-primary)] px-6 py-3 font-semibold text-white transition-colors hover:bg-green-700 focus:outline-none focus-visible:ring-4 focus-visible:ring-green-400/60 active:bg-green-900 disabled:cursor-not-allowed disabled:opacity-60 md:w-auto md:self-start"
+      >
+        Надіслати
+      </button>
+    </form>
+  </main>
+
+  <!-- Модальне вікно успіху. Приховане, доки валідація не пройде -->
+  <div
+    id="successModal"
+    class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70 p-4"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalTitle"
+    aria-describedby="modalText"
+  >
+    <div id="modalCard" class="w-full max-w-md rounded-[var(--radius-md)] border border-[var(--color-primary)] bg-[var(--color-bg-deep)] p-6 text-center shadow-2xl sm:p-8">
+      <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[var(--color-primary)]" aria-hidden="true">
+        <i class="fa-solid fa-check text-2xl text-white"></i>
+      </div>
+      <h2 id="modalTitle" class="mb-2 text-xl font-bold">Дякуємо!</h2>
+      <p id="modalText" class="mb-6 text-[var(--color-text-muted)]">Форма успішно пройшла клієнтську валідацію. Демонстрація успішного надсилання.</p>
+      <button
+        id="closeModalBtn"
+        type="button"
+        class="min-h-[48px] w-full rounded-lg bg-[var(--color-primary)] px-6 py-3 font-semibold text-white transition-colors hover:bg-green-700 focus:outline-none focus-visible:ring-4 focus-visible:ring-green-400/60"
+      >
+        Закрити
+      </button>
+    </div>
+  </div>
+
+  <!-- Підвал (як на головній) -->
+  <footer class="border-t border-[var(--color-surface)] bg-[var(--color-bg-deep)] py-6 md:py-12">
+    <div class="mx-auto grid w-full max-w-6xl grid-cols-2 gap-4 px-4 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
+      <div class="col-span-full grid grid-cols-2 gap-4 lg:col-span-3 lg:grid-cols-3">
+        <nav aria-label="Інструменти">
+          <h2 class="mb-2 font-[var(--font-body)] text-base font-semibold">Інструменти</h2>
+          <ul class="flex flex-col gap-y-1 md:gap-y-2">
+            <li><a class="!text-[var(--color-text-muted)] hover:!text-[var(--color-text)] text-[length:var(--font-size-small)]" href="nether.html">Конвертер</a></li>
+            <li><a class="!text-[var(--color-text-muted)] hover:!text-[var(--color-text)] text-[length:var(--font-size-small)]" href="resources.html">Ресурси</a></li>
+            <li><a class="!text-[var(--color-text-muted)] hover:!text-[var(--color-text)] text-[length:var(--font-size-small)]" href="redstone.html">Редстоун</a></li>
+            <li><a class="!text-[var(--color-text-muted)] hover:!text-[var(--color-text)] text-[length:var(--font-size-small)]" href="recipes.html">Рецепти</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Проєкт">
+          <h2 class="mb-2 font-[var(--font-body)] text-base font-semibold">Проєкт</h2>
+          <ul class="flex flex-col gap-y-1 md:gap-y-2">
+            <li><a class="!text-[var(--color-text-muted)] hover:!text-[var(--color-text)] text-[length:var(--font-size-small)]" href="about.html"><i class="fa-solid fa-circle-info mr-2 text-[var(--icon-color)]" aria-hidden="true"></i>Про проєкт</a></li>
+            <li><a class="!text-[var(--color-text)] text-[length:var(--font-size-small)]" href="feedback.html" aria-current="page"><i class="fa-solid fa-envelope mr-2 text-[var(--icon-color)]" aria-hidden="true"></i>Зворотний зв'язок</a></li>
+            <li><a class="!text-[var(--color-text-muted)] hover:!text-[var(--color-text)] text-[length:var(--font-size-small)]" href="https://forms.gle/XHbDWPuHxU9ZtZ6y7" target="_blank" rel="noopener noreferrer">Приєднатись</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Правова інформація">
+          <h2 class="mb-2 font-[var(--font-body)] text-base font-semibold">Правова інформація</h2>
+          <ul class="flex flex-col gap-y-1 md:gap-y-2">
+            <li><a class="!text-[var(--color-text-muted)] hover:!text-[var(--color-text)] text-[length:var(--font-size-small)]" href="privacy.html"><i class="fa-solid fa-shield-halved mr-2 text-[var(--icon-color)]" aria-hidden="true"></i>Конфіденційність</a></li>
+          </ul>
+        </nav>
+      </div>
+      <p class="col-span-full mt-0 text-[length:var(--font-size-small)] text-[var(--color-text-muted)] lg:col-span-1">Не є офіційним продуктом Mojang / Microsoft. Усі права належать їхнім власникам. © 2026 MineCalc UA</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script src="js/validation.js"></script>
+</body>
+</html>
