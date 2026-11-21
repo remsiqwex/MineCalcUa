@@ -34,7 +34,7 @@
         <ul class="flex flex-col gap-1 py-2 md:flex-row md:items-center md:justify-center md:gap-2 md:whitespace-nowrap lg:gap-4">
           <li><a class="block rounded px-4 py-2 text-sm font-medium !text-[var(--color-text-muted)] transition-colors hover:!text-[var(--color-text)] focus-visible:!text-[var(--color-text)] aria-[current=page]:!text-[var(--color-text)] md:px-2" href="index.html" aria-current="page">Головна</a></li>
           <li><a class="block rounded px-4 py-2 text-sm font-medium !text-[var(--color-text-muted)] transition-colors hover:!text-[var(--color-text)] focus-visible:!text-[var(--color-text)] aria-[current=page]:!text-[var(--color-text)] md:px-2" href="nether.html">Конвертер</a></li>
-          <li><a class="block rounded px-4 py-2 text-sm font-medium !text-[var(--color-text-muted)] transition-colors hover:!text-[var(--color-text)] focus-visible:!text-[var(--color-text)] aria-[current=page]:!text-[var(--color-text)] md:px-2" href="resources.html">Ресурси</a></li>
+          <li><a class="block rounded px-4 py-2 text-sm font-medium !text-[var(--color-text-muted)] transition-colors hover:!text-[var(--color-text)] focus-visible:!text-[var(--color-text)] aria-[current=page]:!text-[var(--color-text)] md:px-2" href="#calculator">Ресурси</a></li>
           <li><a class="block rounded px-4 py-2 text-sm font-medium !text-[var(--color-text-muted)] transition-colors hover:!text-[var(--color-text)] focus-visible:!text-[var(--color-text)] aria-[current=page]:!text-[var(--color-text)] md:px-2" href="redstone.html">Редстоун</a></li>
           <li><a class="block rounded px-4 py-2 text-sm font-medium !text-[var(--color-text-muted)] transition-colors hover:!text-[var(--color-text)] focus-visible:!text-[var(--color-text)] aria-[current=page]:!text-[var(--color-text)] md:px-2" href="recipes.html">Рецепти</a></li>
           <li><a class="block rounded px-4 py-2 text-sm font-medium !text-[var(--color-text-muted)] transition-colors hover:!text-[var(--color-text)] focus-visible:!text-[var(--color-text)] aria-[current=page]:!text-[var(--color-text)] md:px-2" href="shapes.html">Фігури</a></li>
@@ -89,7 +89,7 @@
       <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <li>
           <article class="rounded-[var(--radius-md)] [transition:background-color_var(--transition)] hover:bg-[var(--color-surface)] focus-within:bg-[var(--color-surface)]">
-            <a class="flex aspect-square flex-col items-center justify-start gap-4 px-6 pt-12 pb-6 text-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-text)]" href="resources.html">
+            <a class="flex aspect-square flex-col items-center justify-start gap-4 px-6 pt-12 pb-6 text-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-text)]" href="#calculator">
               <img class="h-40 w-full object-contain" src="assets/icons/resources.svg" alt="" width="120" height="120" loading="lazy" decoding="async">
               <h3 class="text-[length:var(--font-size-card-title)] font-semibold">Ресурси</h3>
               <p class="max-w-[28ch] text-[length:var(--font-size-small)] text-[var(--color-text-muted)]">Порахуй блоки, стаки та шалкери для наступної великої будівлі.</p>
@@ -125,6 +125,70 @@
         <li><a class="tile" href="shapes.html"><span class="tile__label">Фігури</span><span class="tile__arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></a></li>
         <li><a class="tile" href="costs.html"><span class="tile__label">Витрати</span><span class="tile__arrow" aria-hidden="true"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span></a></li>
       </ul>
+    </section>
+
+    <!-- ЛР №11: інтерактивний віджет «Калькулятор ресурсів» -->
+    <section class="mx-auto mt-[var(--space-section)] w-full max-w-6xl scroll-mt-24 px-4 sm:px-6 lg:px-8" id="calculator" aria-labelledby="calc-title">
+      <h2 class="section-title mb-2" id="calc-title">Калькулятор ресурсів</h2>
+      <p class="mb-6 text-[var(--color-text-muted)]">Введи розміри будівлі — порахуємо, скільки блоків, стаків і шалкерів знадобиться.</p>
+
+      <div class="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_340px]" data-calc>
+        <!-- Параметри -->
+        <form class="flex flex-col gap-5 rounded-[var(--radius-md)] bg-[var(--color-surface)] p-5 sm:p-6" id="calc-form" novalidate>
+          <div class="flex flex-col gap-2">
+            <label class="text-sm font-semibold" for="calc-shape">Тип конструкції</label>
+            <select class="min-h-[48px] w-full cursor-pointer rounded-lg border-2 border-gray-600 bg-[var(--color-bg)] px-4 py-3 text-base text-[var(--color-text)] hover:border-gray-400 focus:outline-none focus-visible:border-blue-400 focus-visible:ring-4 focus-visible:ring-blue-500/30" id="calc-shape" name="shape" aria-describedby="calc-shape-hint">
+              <option value="solid">Суцільний блок</option>
+              <option value="hollow" selected>Порожня коробка</option>
+              <option value="walls">Лише стіни</option>
+            </select>
+            <p class="text-xs text-[var(--color-text-muted)]" id="calc-shape-hint">Коробка — стіни, підлога і дах (будинок). Лише стіни — без підлоги й даху (паркан, вежа).</p>
+          </div>
+
+          <fieldset class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <legend class="mb-2 text-sm font-semibold">Розміри, у блоках</legend>
+            <div class="flex flex-col gap-2">
+              <label class="text-sm text-[var(--color-text-muted)]" for="calc-length">Довжина</label>
+              <input class="calc-num min-h-[48px] w-full rounded-lg border-2 border-gray-600 bg-[var(--color-bg)] px-4 py-3 text-base text-[var(--color-text)] hover:border-gray-400 focus:outline-none focus-visible:border-blue-400 focus-visible:ring-4 focus-visible:ring-blue-500/30" id="calc-length" name="length" type="number" inputmode="numeric" min="1" max="256" step="1" value="10" required aria-describedby="calc-length-error" aria-invalid="false">
+              <p class="hidden text-sm text-red-400" id="calc-length-error" aria-live="polite"></p>
+            </div>
+            <div class="flex flex-col gap-2">
+              <label class="text-sm text-[var(--color-text-muted)]" for="calc-width">Ширина</label>
+              <input class="calc-num min-h-[48px] w-full rounded-lg border-2 border-gray-600 bg-[var(--color-bg)] px-4 py-3 text-base text-[var(--color-text)] hover:border-gray-400 focus:outline-none focus-visible:border-blue-400 focus-visible:ring-4 focus-visible:ring-blue-500/30" id="calc-width" name="width" type="number" inputmode="numeric" min="1" max="256" step="1" value="10" required aria-describedby="calc-width-error" aria-invalid="false">
+              <p class="hidden text-sm text-red-400" id="calc-width-error" aria-live="polite"></p>
+            </div>
+            <div class="flex flex-col gap-2">
+              <label class="text-sm text-[var(--color-text-muted)]" for="calc-height">Висота</label>
+              <input class="calc-num min-h-[48px] w-full rounded-lg border-2 border-gray-600 bg-[var(--color-bg)] px-4 py-3 text-base text-[var(--color-text)] hover:border-gray-400 focus:outline-none focus-visible:border-blue-400 focus-visible:ring-4 focus-visible:ring-blue-500/30" id="calc-height" name="height" type="number" inputmode="numeric" min="1" max="384" step="1" value="6" required aria-describedby="calc-height-error" aria-invalid="false">
+              <p class="hidden text-sm text-red-400" id="calc-height-error" aria-live="polite"></p>
+            </div>
+          </fieldset>
+
+          <div class="flex flex-col gap-2">
+            <div class="flex items-baseline justify-between">
+              <label class="text-sm font-semibold" for="calc-reserve">Запас на помилки</label>
+              <output class="text-sm font-semibold text-[var(--color-accent)]" id="calc-reserve-value" for="calc-reserve">10 %</output>
+            </div>
+            <input class="h-2 w-full cursor-pointer accent-[var(--color-primary)]" id="calc-reserve" name="reserve" type="range" min="0" max="25" step="5" value="10">
+          </div>
+
+          <label class="flex cursor-pointer items-start gap-3 text-sm text-[var(--color-text-muted)]" for="calc-shulker">
+            <input class="mt-0.5 h-5 w-5 shrink-0 cursor-pointer accent-[var(--color-primary)]" id="calc-shulker" name="shulker" type="checkbox" checked>
+            Пакувати в шалкери (27 стаків у кожному)
+          </label>
+        </form>
+
+        <!-- Результат -->
+        <div class="flex flex-col gap-4 rounded-[var(--radius-md)] border border-[var(--color-primary)] bg-[var(--color-bg-deep)] p-5 sm:p-6" aria-live="polite" aria-atomic="true">
+          <p class="text-sm font-semibold uppercase tracking-wide text-[var(--color-text-muted)]">Потрібно блоків</p>
+          <p class="break-words font-[var(--font-heading)] text-4xl font-bold text-[var(--color-text)]" id="calc-total">—</p>
+          <dl class="flex flex-col gap-3 border-t border-[var(--color-surface)] pt-4 text-sm">
+            <div class="flex justify-between gap-4"><dt class="text-[var(--color-text-muted)]">Стаків по 64</dt><dd class="text-right font-semibold" id="calc-stacks">—</dd></div>
+            <div class="flex justify-between gap-4" id="calc-shulker-row"><dt class="text-[var(--color-text-muted)]">Шалкерів</dt><dd class="text-right font-semibold" id="calc-shulkers">—</dd></div>
+          </dl>
+          <p class="text-xs text-[var(--color-text-muted)]" id="calc-note"></p>
+        </div>
+      </div>
     </section>
 
     <!-- ЛР №10: галерея з Fancybox v5 -->
@@ -300,7 +364,7 @@
           <h2 class="mb-2 font-[var(--font-body)] text-base font-semibold">Інструменти</h2>
           <ul class="flex flex-col gap-y-1 md:gap-y-2">
             <li><a class="[transition:color_var(--transition)] !text-[var(--color-text-muted)] hover:!text-[var(--color-text)] focus-visible:!text-[var(--color-text)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-text)] text-[length:var(--font-size-small)]" href="nether.html">Конвертер</a></li>
-            <li><a class="[transition:color_var(--transition)] !text-[var(--color-text-muted)] hover:!text-[var(--color-text)] focus-visible:!text-[var(--color-text)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-text)] text-[length:var(--font-size-small)]" href="resources.html">Ресурси</a></li>
+            <li><a class="[transition:color_var(--transition)] !text-[var(--color-text-muted)] hover:!text-[var(--color-text)] focus-visible:!text-[var(--color-text)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-text)] text-[length:var(--font-size-small)]" href="#calculator">Ресурси</a></li>
             <li><a class="[transition:color_var(--transition)] !text-[var(--color-text-muted)] hover:!text-[var(--color-text)] focus-visible:!text-[var(--color-text)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-text)] text-[length:var(--font-size-small)]" href="redstone.html">Редстоун</a></li>
             <li><a class="[transition:color_var(--transition)] !text-[var(--color-text-muted)] hover:!text-[var(--color-text)] focus-visible:!text-[var(--color-text)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-text)] text-[length:var(--font-size-small)]" href="recipes.html">Рецепти</a></li>
           </ul>
@@ -330,5 +394,6 @@
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.umd.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js"></script>
   <script src="js/plugins.js"></script>
+  <script src="js/widget.js"></script>
 </body>
 </html>
