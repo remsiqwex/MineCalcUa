@@ -363,6 +363,21 @@ h1, h2, h3 {
   }
 }
 
+/* 9. ПЛАГІНИ (ЛР №10) --------------------------------- */
+/* Кольори Swiper під тему сайту через його CSS-змінні */
+.reviews-swiper {
+  --swiper-theme-color: var(--color-accent);
+  --swiper-pagination-bullet-inactive-color: var(--color-text-muted);
+  --swiper-pagination-bullet-inactive-opacity: 0.5;
+  --swiper-pagination-bullet-size: 10px;
+}
+
+/* Курсор Typed.js у кольорі акценту */
+.hero__title .typed-cursor {
+  color: var(--color-accent);
+  font-weight: 400;
+}
+
 @media (prefers-reduced-motion: reduce) {
   :root {
     --transition: 0s;

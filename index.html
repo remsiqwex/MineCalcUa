@@ -15,6 +15,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&amp;family=Unbounded:wght@600;700&amp;display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <!-- ЛР №10: стилі сторонніх плагінів підключаємо в head, щоб уникнути FOUC -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -70,7 +73,11 @@
       <div class="hero__inner mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-0">
         <!-- Заголовок і вступний текст позначені як вступ секції. -->
         <header class="hero__text">
-          <h1 class="hero__title" id="hero-title">Точні калькулятори Minecraft українською</h1>
+          <h1 class="hero__title" id="hero-title">
+            <span class="sr-only">Точні калькулятори Minecraft українською</span>
+            <!-- Видима частина з ефектом друку (Typed.js). Для зчитувачів екрана — статичний текст вище -->
+            <span aria-hidden="true">Точні калькулятори Minecraft<br><span class="inline-block min-h-[2.5em] text-[var(--color-accent)] sm:min-h-[1.25em]"><span id="typed-text">українською</span></span></span>
+          </h1>
           <p class="hero__subtitle">Розраховуй ресурси, координати та механізми. Менше підрахунків — більше часу для гри.</p>
         </header>
       </div>
@@ -78,7 +85,7 @@
 
     <!-- Три основні інструменти -->
     <section class="tools mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8" aria-labelledby="tools-title">
-      <h2 class="visually-hidden" id="tools-title">Основні інструменти</h2>
+      <h2 class="sr-only" id="tools-title">Основні інструменти</h2>
       <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <li>
           <article class="rounded-[var(--radius-md)] [transition:background-color_var(--transition)] hover:bg-[var(--color-surface)] focus-within:bg-[var(--color-surface)]">
@@ -120,6 +127,45 @@
       </ul>
     </section>
 
+    <!-- ЛР №10: галерея з Fancybox v5 -->
+    <section class="mx-auto mt-[var(--space-section)] w-full max-w-6xl px-4 sm:px-6 lg:px-8" id="gallery" aria-labelledby="gallery-title">
+      <h2 class="section-title mb-2" id="gallery-title">Натхнення для будівель</h2>
+      <p class="mb-6 text-[var(--color-text-muted)]">Ідеї з реального світу, які легко перенести в гру. Натисни на фото, щоб відкрити його на весь екран.</p>
+      <ul class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+        <li>
+          <a class="group block overflow-hidden rounded-[var(--radius-md)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-text)]" href="assets/images/gallery/build-1.jpg" data-fancybox="builds" data-caption="Замок серед лісу — референс для середньовічної фортеці">
+            <img class="aspect-[4/3] w-full object-cover transition-transform duration-300 group-hover:scale-105" src="assets/images/gallery/build-1-thumb.jpg" alt="Освітлений замок на пагорбі серед темного лісу" width="600" height="450" loading="lazy" decoding="async">
+          </a>
+        </li>
+        <li>
+          <a class="group block overflow-hidden rounded-[var(--radius-md)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-text)]" href="assets/images/gallery/build-4.jpg" data-fancybox="builds" data-caption="Стів і Алекс з LEGO біля печі — сцена для стартової бази">
+            <img class="aspect-[4/3] w-full object-cover transition-transform duration-300 group-hover:scale-105" src="assets/images/gallery/build-4-thumb.jpg" alt="LEGO-фігурки Стіва та Алекс біля печі й трави" width="600" height="450" loading="lazy" decoding="async">
+          </a>
+        </li>
+        <li>
+          <a class="group block overflow-hidden rounded-[var(--radius-md)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-text)]" href="assets/images/gallery/build-5.jpg" data-fancybox="builds" data-caption="Піксель-арт кавун на стіні — так виглядає схема з калькулятора фігур">
+            <img class="aspect-[4/3] w-full object-cover transition-transform duration-300 group-hover:scale-105" src="assets/images/gallery/build-5-thumb.jpg" alt="Мозаїка у формі скибки кавуна на бетонній стіні" width="600" height="450" loading="lazy" decoding="async">
+          </a>
+        </li>
+        <li>
+          <a class="group block overflow-hidden rounded-[var(--radius-md)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-text)]" href="assets/images/gallery/build-6.jpg" data-fancybox="builds" data-caption="Лампа-зілля і блок діамантової руди — декор для кімнати гравця">
+            <img class="aspect-[4/3] w-full object-cover transition-transform duration-300 group-hover:scale-105" src="assets/images/gallery/build-6-thumb.jpg" alt="Світильник у формі пляшки зілля поруч із блоком руди" width="600" height="450" loading="lazy" decoding="async">
+          </a>
+        </li>
+        <li>
+          <a class="group block overflow-hidden rounded-[var(--radius-md)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-text)]" href="assets/images/gallery/build-3.jpg" data-fancybox="builds" data-caption="Ретро-комп'ютер у лісі — ідея для затишної схованки">
+            <img class="aspect-[4/3] w-full object-cover transition-transform duration-300 group-hover:scale-105" src="assets/images/gallery/build-3-thumb.jpg" alt="Старий комп'ютер із зеленим смайлом на екрані серед нічного лісу" width="600" height="450" loading="lazy" decoding="async">
+          </a>
+        </li>
+        <li>
+          <a class="group block overflow-hidden rounded-[var(--radius-md)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--color-text)]" href="assets/images/gallery/build-8.jpg" data-fancybox="builds" data-caption="Лабіринт з блоків і сходів — натхнення для паркур-карти">
+            <img class="aspect-[4/3] w-full object-cover transition-transform duration-300 group-hover:scale-105" src="assets/images/gallery/build-8-thumb.jpg" alt="Дерев'яний лабіринт з кубів і сходів з мініатюрними фігурками людей" width="600" height="450" loading="lazy" decoding="async">
+          </a>
+        </li>
+      </ul>
+      <p class="mt-3 text-[length:var(--font-size-xs)] text-[var(--color-text-muted)]">Фото: <a class="underline underline-offset-2 hover:text-[var(--color-text)]" href="https://unsplash.com/s/photos/minecraft" target="_blank" rel="noopener noreferrer">Unsplash</a></p>
+    </section>
+
     <section class="mx-auto mt-[var(--space-section)] w-full max-w-6xl px-4 sm:px-6 lg:px-8" id="map" aria-labelledby="map-title">
       <h2 class="section-title mb-6" id="map-title">Де нас знайти</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
@@ -134,6 +180,84 @@
       <h2 class="section-title mb-6" id="video-title">Відео</h2>
       <div class="aspect-video w-full max-w-3xl mx-auto rounded-2xl overflow-hidden shadow-xl">
       <iframe width="560" height="315" src="https://www.youtube.com/embed/j2krKQ_u8H4?si=fi5Q01O1X5d6QxgK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <!-- ЛР №10: слайдер відгуків на Swiper.js v11 -->
+    <section class="mx-auto mt-[var(--space-section)] w-full max-w-6xl px-4 sm:px-6 lg:px-8" id="reviews" aria-labelledby="reviews-title">
+      <div class="mb-6 flex items-end justify-between gap-4">
+        <h2 class="section-title" id="reviews-title">Що кажуть гравці</h2>
+        <!-- Стрілки винесено за межі слайдера, щоб вони не перекривали картки. На телефоні — свайп і крапки -->
+        <div class="hidden gap-2 md:flex">
+          <button class="reviews-prev flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border)] text-[var(--color-text)] transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-text)]" type="button" aria-label="Попередній відгук"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
+          <button class="reviews-next flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border)] text-[var(--color-text)] transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-text)]" type="button" aria-label="Наступний відгук"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+        </div>
+      </div>
+
+      <div class="swiper reviews-swiper !pb-12">
+        <ul class="swiper-wrapper">
+          <li class="swiper-slide !h-auto">
+            <article class="flex h-full flex-col gap-4 rounded-[var(--radius-md)] bg-[var(--color-surface)] p-6">
+              <p class="text-[var(--color-accent)]" aria-label="Оцінка 5 з 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></p>
+              <p class="flex-1 text-[var(--color-text-muted)]">«Конвертер координат врятував мій портал у Незері. Нарешті правильно рахує від'ємні значення».</p>
+              <footer class="flex items-center gap-3">
+                <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-[#1d793b] font-semibold text-white" aria-hidden="true">ОК</span>
+                <span><span class="block font-semibold">Oleh_Kraft</span><span class="block text-[length:var(--font-size-small)] text-[var(--color-text-muted)]">Java, виживання</span></span>
+              </footer>
+            </article>
+          </li>
+          <li class="swiper-slide !h-auto">
+            <article class="flex h-full flex-col gap-4 rounded-[var(--radius-md)] bg-[var(--color-surface)] p-6">
+              <p class="text-[var(--color-accent)]" aria-label="Оцінка 5 з 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></p>
+              <p class="flex-1 text-[var(--color-text-muted)]">«Порахувала шалкери для мега-бази за хвилину. Раніше сиділа з калькулятором у телефоні півгодини».</p>
+              <footer class="flex items-center gap-3">
+                <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-[#2563EB] font-semibold text-white" aria-hidden="true">МБ</span>
+                <span><span class="block font-semibold">MariBuilds</span><span class="block text-[length:var(--font-size-small)] text-[var(--color-text-muted)]">Bedrock, будівництво</span></span>
+              </footer>
+            </article>
+          </li>
+          <li class="swiper-slide !h-auto">
+            <article class="flex h-full flex-col gap-4 rounded-[var(--radius-md)] bg-[var(--color-surface)] p-6">
+              <p class="text-[var(--color-accent)]" aria-label="Оцінка 4 з 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-regular fa-star" aria-hidden="true"></i></p>
+              <p class="flex-1 text-[var(--color-text-muted)]">«Редстоун-помічник класний, але хочу ще калькулятор для ферм. Чекаю оновлення!»</p>
+              <footer class="flex items-center gap-3">
+                <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-[#b91c1c] font-semibold text-white" aria-hidden="true">RS</span>
+                <span><span class="block font-semibold">RedstoneSasha</span><span class="block text-[length:var(--font-size-small)] text-[var(--color-text-muted)]">Java, механізми</span></span>
+              </footer>
+            </article>
+          </li>
+          <li class="swiper-slide !h-auto">
+            <article class="flex h-full flex-col gap-4 rounded-[var(--radius-md)] bg-[var(--color-surface)] p-6">
+              <p class="text-[var(--color-accent)]" aria-label="Оцінка 5 з 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></p>
+              <p class="flex-1 text-[var(--color-text-muted)]">«Нарешті все українською: назви предметів такі самі, як у грі. Показую сайт молодшому брату».</p>
+              <footer class="flex items-center gap-3">
+                <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-[#7c3aed] font-semibold text-white" aria-hidden="true">ДН</span>
+                <span><span class="block font-semibold">Dasha_Nether</span><span class="block text-[length:var(--font-size-small)] text-[var(--color-text-muted)]">Bedrock, пригоди</span></span>
+              </footer>
+            </article>
+          </li>
+          <li class="swiper-slide !h-auto">
+            <article class="flex h-full flex-col gap-4 rounded-[var(--radius-md)] bg-[var(--color-surface)] p-6">
+              <p class="text-[var(--color-accent)]" aria-label="Оцінка 5 з 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></p>
+              <p class="flex-1 text-[var(--color-text-muted)]">«Генератор кіл — must have для куполів. Скопіював схему і збудував обсерваторію за вечір».</p>
+              <footer class="flex items-center gap-3">
+                <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-[#c2410c] font-semibold text-white" aria-hidden="true">AS</span>
+                <span><span class="block font-semibold">Andrii_Sphere</span><span class="block text-[length:var(--font-size-small)] text-[var(--color-text-muted)]">Java, креатив</span></span>
+              </footer>
+            </article>
+          </li>
+          <li class="swiper-slide !h-auto">
+            <article class="flex h-full flex-col gap-4 rounded-[var(--radius-md)] bg-[var(--color-surface)] p-6">
+              <p class="text-[var(--color-accent)]" aria-label="Оцінка 5 з 5"><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i><i class="fa-solid fa-star" aria-hidden="true"></i></p>
+              <p class="flex-1 text-[var(--color-text-muted)]">«Темна тема і жодної реклами — відкриваю на другому моніторі просто під час гри».</p>
+              <footer class="flex items-center gap-3">
+                <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-[#0e7490] font-semibold text-white" aria-hidden="true">ТП</span>
+                <span><span class="block font-semibold">Taras_Pixel</span><span class="block text-[length:var(--font-size-small)] text-[var(--color-text-muted)]">Java, сервер друзів</span></span>
+              </footer>
+            </article>
+          </li>
+        </ul>
+        <div class="swiper-pagination"></div>
       </div>
     </section>
 
@@ -201,5 +325,10 @@
   </footer>
 
   <script src="js/script.js"></script>
+  <!-- ЛР №10: бібліотеки підключені перед </body>, щоб не блокувати рендер сторінки -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js"></script>
+  <script src="js/plugins.js"></script>
 </body>
 </html>
