@@ -177,7 +177,7 @@ h1, h2, h3 {
   display: flex;
   align-items: center;
   min-height: 520px;
-  background: var(--color-bg) url("../assets/images/hero-banner.jpg") right center / cover no-repeat;
+  background: var(--color-bg) url("../assets/images/hero-banner.webp") right center / cover no-repeat;
   box-shadow: var(--shadow-hero);
 }
 
@@ -369,7 +369,8 @@ h1, h2, h3 {
   --swiper-theme-color: var(--color-accent);
   --swiper-pagination-bullet-inactive-color: var(--color-text-muted);
   --swiper-pagination-bullet-inactive-opacity: 0.5;
-  --swiper-pagination-bullet-size: 10px;
+  --swiper-pagination-bullet-size: 12px;
+  --swiper-pagination-bullet-horizontal-gap: 8px; /* ЛР №12: центри крапок ≥ 24 px одна від одної (WCAG 2.5.8) */
 }
 
 /* Курсор Typed.js у кольорі акценту */
@@ -384,4 +385,22 @@ h1, h2, h3 {
     --transition-toggle: 0s;
     --transition-menu: 0s;
   }
+}
+
+/* 10. ЛР №12: ОПТИМІЗАЦІЯ ---------------------------- */
+/* На телефоні — легша версія фону hero (800 px, 23 КБ замість 60 КБ) */
+@media (max-width: 800px) {
+  .hero {
+    background-image: url("../assets/images/hero-banner-800.webp");
+  }
+}
+
+/* Більша зона дотику для крапок слайдера без зміни їхнього вигляду */
+.reviews-swiper .swiper-pagination-bullet {
+  position: relative;
+}
+.reviews-swiper .swiper-pagination-bullet::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
 }
