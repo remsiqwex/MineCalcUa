@@ -1,0 +1,52 @@
+# ЛР №12: CI/CD — перевірка і автоматичний деплой на Vercel після кожного push у main
+name: CI/CD Production Deploy
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: # ручний запуск з вкладки Actions
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+jobs:
+  check:
+    name: Check project files
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Required files exist
+        run: |
+          for f in index.html feedback.html css/style.css css/tailwind.css js/script.js js/plugins.js js/widget.js js/validation.js js/embeds.js robots.txt sitemap.xml; do
+            test -f "$f" || { echo "::error::Missing file: $f"; exit 1; }
+          done
+          echo "All required files are present"
+
+      - name: vercel.json is valid JSON
+        run: python3 -m json.tool vercel.json > /dev/null
+
+      - name: No Tailwind CDN in production pages
+        run: |
+          if grep -n "cdn.tailwindcss.com" index.html feedback.html; then
+            echo "::error::Tailwind CDN must not be used in production"; exit 1
+          fi
+
+  deploy:
+    name: Deploy to Vercel
+    needs: check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
