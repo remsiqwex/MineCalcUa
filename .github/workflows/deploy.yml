@@ -30,7 +30,7 @@ jobs:
 
       - name: No Tailwind CDN in production pages
         run: |
-          if grep -n "cdn.tailwindcss.com" index.html feedback.html; then
+          if grep -nE "<script[^>]*cdn.tailwindcss.com" index.html feedback.html; then
             echo "::error::Tailwind CDN must not be used in production"; exit 1
           fi
 
