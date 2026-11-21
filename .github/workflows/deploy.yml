@@ -45,8 +45,20 @@ jobs:
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
 
+      - name: Check Vercel secrets
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          for n in VERCEL_TOKEN VERCEL_ORG_ID VERCEL_PROJECT_ID; do
+            test -n "${!n}" || { echo "::error::Secret $n is empty or missing"; exit 1; }
+          done
+          echo "All Vercel secrets are set"
+
       - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+        run: |
+          set -o pipefail
+          vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }} 2>&1 | tee pull.log || {
+            echo "::error::vercel pull failed: $(grep -iE 'error|not found|invalid|forbidden' pull.log | tail -2 | tr '\n' ' ')"; exit 1; }
 
       - name: Deploy Project Artifacts to Vercel
         run: vercel deploy --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
