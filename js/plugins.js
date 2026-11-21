@@ -3,7 +3,42 @@
    Swiper.js v11, Fancybox v5, Typed.js — Vanilla JS, без jQuery.
    ============================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
+/* ЛР №12: бібліотеки потрібні нижче першого екрана, тому вантажимо їх після події load —
+   вони більше не конкурують за мережу з LCP-зображенням hero. */
+const PLUGIN_CSS = [
+  "https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css",
+  "https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.css",
+];
+const PLUGIN_JS = [
+  "https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js",
+  "https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.36/dist/fancybox/fancybox.umd.js",
+  "https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js",
+];
+
+function loadScript(src) {
+  return new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = src;
+    script.onload = resolve;
+    script.onerror = reject;
+    document.head.appendChild(script);
+  });
+}
+
+function loadPlugins() {
+  PLUGIN_CSS.forEach((href) => {
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = href;
+    document.head.appendChild(link);
+  });
+  Promise.allSettled(PLUGIN_JS.map(loadScript)).then(initPlugins);
+}
+
+if (document.readyState === "complete") loadPlugins();
+else window.addEventListener("load", loadPlugins, { once: true });
+
+function initPlugins() {
   // Якщо користувач вимкнув анімації в системі, не запускаємо автопрокрутку та ефект друку
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -75,4 +110,4 @@ document.addEventListener("DOMContentLoaded", () => {
       loop: true,
     });
   }
-});
+}
