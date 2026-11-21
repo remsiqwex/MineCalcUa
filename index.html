@@ -17,10 +17,6 @@
   <meta property="og:image" content="https://minecraftcalculationua228.vercel.app/assets/images/hero-banner.webp">
   <meta property="og:locale" content="uk_UA">
 
-  <!-- ЛР №12: LCP-зображення (фон hero) завантажуємо першочергово, на телефоні — легшу версію -->
-  <link rel="preload" as="image" href="assets/images/hero-banner-800.webp" media="(max-width: 800px)" fetchpriority="high">
-  <link rel="preload" as="image" href="assets/images/hero-banner.webp" media="(min-width: 801px)" fetchpriority="high">
-
   <!-- Шрифти: Unbounded (заголовки), Plus Jakarta Sans (текст) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -88,6 +84,11 @@
 
     <!-- Головний блок -->
     <section class="hero" aria-labelledby="hero-title">
+      <!-- ЛР №12: фон hero — справжнє <img> (LCP-елемент видно браузеру одразу з HTML), на телефоні — версія 800 px -->
+      <picture>
+        <source media="(max-width: 800px)" srcset="assets/images/hero-banner-800.webp" width="800" height="388">
+        <img class="hero__bg" src="assets/images/hero-banner.webp" alt="" width="1600" height="776" fetchpriority="high">
+      </picture>
       <div class="hero__inner mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-0">
         <!-- Заголовок і вступний текст позначені як вступ секції. -->
         <header class="hero__text">

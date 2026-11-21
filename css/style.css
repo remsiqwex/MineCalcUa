@@ -177,9 +177,23 @@ h1, h2, h3 {
   display: flex;
   align-items: center;
   min-height: 520px;
-  background: var(--color-bg) url("../assets/images/hero-banner.webp") right center / cover no-repeat;
+  overflow: hidden;
+  background-color: var(--color-bg);
   box-shadow: var(--shadow-hero);
 }
+
+/* ЛР №12: фонове зображення — <img class="hero__bg"> у HTML замість CSS background */
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right center;
+}
+
+.hero::before { z-index: 1; }      /* градієнт над зображенням */
+.hero__inner { z-index: 2; }       /* текст над градієнтом */
 
 /* Градієнт кольору фону зліва, щоб текст читався */
 .hero::before {
@@ -388,13 +402,6 @@ h1, h2, h3 {
 }
 
 /* 10. ЛР №12: ОПТИМІЗАЦІЯ ---------------------------- */
-/* На телефоні — легша версія фону hero (800 px, 23 КБ замість 60 КБ) */
-@media (max-width: 800px) {
-  .hero {
-    background-image: url("../assets/images/hero-banner-800.webp");
-  }
-}
-
 /* Більша зона дотику для крапок слайдера без зміни їхнього вигляду */
 .reviews-swiper .swiper-pagination-bullet {
   position: relative;
