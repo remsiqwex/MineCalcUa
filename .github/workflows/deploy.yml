@@ -61,4 +61,7 @@ jobs:
             echo "::error::vercel pull failed: $(grep -iE 'error|not found|invalid|forbidden' pull.log | tail -2 | tr '\n' ' ')"; exit 1; }
 
       - name: Deploy Project Artifacts to Vercel
-        run: vercel deploy --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
+        run: |
+          set -o pipefail
+          vercel deploy --prod --yes --token=${{ secrets.VERCEL_TOKEN }} 2>&1 | tee deploy.log || {
+            echo "::error::vercel deploy failed: $(grep -iE 'error|not found|invalid|forbidden|exist' deploy.log | tail -3 | tr '\n' ' ')"; exit 1; }
