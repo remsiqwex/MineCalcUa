@@ -66,5 +66,7 @@ jobs:
       - name: Deploy Project Artifacts to Vercel
         run: |
           set -o pipefail
+          test -f .vercel/project.json && echo "Project linked by vercel pull"
+          unset VERCEL_ORG_ID VERCEL_PROJECT_ID # беремо зв'язку з .vercel/project.json
           vercel deploy --prod --yes --token=${{ secrets.VERCEL_TOKEN }} 2>&1 | tee deploy.log || {
             echo "::error::vercel deploy failed: $(grep -iE 'error|not found|invalid|forbidden|exist' deploy.log | tail -3 | tr '\n' ' ')"; exit 1; }
