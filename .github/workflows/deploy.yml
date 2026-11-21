@@ -53,6 +53,9 @@ jobs:
             test -n "${!n}" || { echo "::error::Secret $n is empty or missing"; exit 1; }
           done
           echo "All Vercel secrets are set"
+          # прибираємо випадкові пробіли/переноси рядка, що потрапили при копіюванні ID
+          echo "VERCEL_ORG_ID=$(printf '%s' "$VERCEL_ORG_ID" | tr -d '[:space:]')" >> "$GITHUB_ENV"
+          echo "VERCEL_PROJECT_ID=$(printf '%s' "$VERCEL_PROJECT_ID" | tr -d '[:space:]')" >> "$GITHUB_ENV"
 
       - name: Pull Vercel Environment Information
         run: |
